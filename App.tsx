@@ -7,6 +7,13 @@ import Navigation from "./src/navigation";
 import { NativeBaseProvider } from "native-base";
 import theme from "./src/theme/theme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { IS_WEB } from "./src/utils/Constants";
+
+if (__DEV__ && !IS_WEB) {
+  import("./src/ReactotronConfig").then(() =>
+    console.log("Reactotron Configured")
+  );
+}
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

@@ -1,14 +1,13 @@
-import { Home } from "@/screens/Home";
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
-import { RootStackParamList } from "../../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { RootStack } from "./RootStack";
+import { navigationRef } from "./utils";
 
 export default function Navigation({
   colorScheme,
@@ -19,18 +18,9 @@ export default function Navigation({
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      ref={navigationRef}
     >
-      <RootNavigator />
+      <RootStack />
     </NavigationContainer>
-  );
-}
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
-function RootNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
   );
 }

@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+import "react-native-reanimated";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./src/hooks/useCachedResources";
@@ -8,12 +9,15 @@ import { NativeBaseProvider } from "native-base";
 import theme from "./src/theme/theme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { IS_WEB } from "./src/utils/Constants";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 if (__DEV__ && !IS_WEB) {
   import("./src/ReactotronConfig").then(() =>
     console.log("Reactotron Configured")
   );
 }
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -24,12 +28,14 @@ export default function App() {
   } else {
     return (
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <NativeBaseProvider theme={theme}>
-          <SafeAreaProvider>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar />
-          </SafeAreaProvider>
-        </NativeBaseProvider>
+        <QueryClientProvider client={queryClient}>
+          <NativeBaseProvider theme={theme}>
+            <SafeAreaProvider>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+            </SafeAreaProvider>
+          </NativeBaseProvider>
+        </QueryClientProvider>
       </GestureHandlerRootView>
     );
   }

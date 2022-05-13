@@ -1,4 +1,4 @@
-import { extendTheme } from "native-base";
+import { extendTheme } from 'native-base';
 
 const Spacing = {
   xs: 4,
@@ -9,9 +9,9 @@ const Spacing = {
 };
 
 const Colors = {
-  white: "#ffffff",
-  black: "#000000",
-  grey: "#cccccc",
+  white: '#ffffff',
+  black: '#000000',
+  grey: '#cccccc',
 };
 
 const theme = extendTheme({
@@ -23,13 +23,13 @@ const theme = extendTheme({
       defaultProps: {},
       variants: {
         header: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
           fontSize: 34,
           lineHeight: 42.5,
           // color: "black",
         },
         subheader: {
-          fontWeight: "600",
+          fontWeight: '600',
           fontSize: 24,
           lineHeight: 36,
           // color: "black",
@@ -46,7 +46,8 @@ const theme = extendTheme({
 
 type CustomThemeType = typeof theme;
 
-declare module "native-base" {
+/* eslint-disable */
+declare module 'native-base' {
   interface ICustomTheme extends CustomThemeType {}
 }
 
